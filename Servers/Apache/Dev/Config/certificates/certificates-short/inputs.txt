@@ -4,4 +4,4 @@ city=               Fort Lauderdale
 company=            Israel Meiresonne
 company_department= Digital Department
 domain=             localhost
-admin=              admin@localhost
+email=              admin@localhost
