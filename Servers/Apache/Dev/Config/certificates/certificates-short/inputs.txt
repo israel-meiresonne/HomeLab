@@ -1,0 +1,7 @@
+country_code=       US
+state_name=         Florida
+city=               Fort Lauderdale
+company=            Israel Meiresonne
+company_department= Digital Department
+domain=             localhost
+admin=              admin@localhost
