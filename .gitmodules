@@ -1,0 +1,4 @@
+[submodule "Applications/LamaChat/Dev/LamaChat"]
+	path = Applications/LamaChat/Dev/LamaChat
+	url = https://gitlab.com/israel_meiresonne97/lamachat.git
+	branch = HomeLab
