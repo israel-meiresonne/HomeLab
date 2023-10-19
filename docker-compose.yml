@@ -11,6 +11,7 @@ services:
       - 7443:443
     volumes:
       - ./Servers/Apache/Dev/Shared:/var/shared:ro
+      - ./Applications/LamaChat/Dev/LamaChat/App:/var/www/lamachat.localhost
     links:
         - homelab-mysql
   homelab-mysql:
