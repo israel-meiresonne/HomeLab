@@ -22,3 +22,10 @@ ALL_VAR="#!/bin/bash${S}
 LAB_ROOT=${LAB_ROOT}
 LAB_NAME=${LAB_NAME}"
 (ls "$DIR_ENVVARS" > "$TRASH" 2>&1 || mkdir "$DIR_ENVVARS") && echo "$ALL_VAR" > $FILE_ENVVARS
+# -----------------------------------------------------------------------------
+# Generate config files
+# -----------------------------------------------------------------------------
+DIR_APP_VH='Applications/LamaChat/Dev/Services/Server/Apache/sites-available'
+DIR_APACHE_VH='Servers/Apache/Dev/Shared/sites-available'
+rm "${DIR_APACHE_VH}/"*
+cp "${DIR_APP_VH}/"* "${DIR_APACHE_VH}/"
