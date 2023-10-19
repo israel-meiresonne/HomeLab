@@ -1,3 +1,4 @@
+.DS_Store
 Applications/MeimBox
 Configs/*
 Databases/MySQL/Storage/docker/mysql-datadirectory
