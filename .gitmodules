@@ -1,4 +1,0 @@
-[submodule "Applications/MeimBox/Dev/MeimBox"]
-	path = Applications/MeimBox/Dev/MeimBox
-	url = https://gitlab.com/israel_meiresonne97/meimbox.git
-	branch = HomeLab
