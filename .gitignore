@@ -1,5 +1,4 @@
 .DS_Store
-Applications/LamaChat
 Configs/*
 Databases/MySQL/Storage/docker/mysql-datadirectory
 Servers/Apache/*/Shared
