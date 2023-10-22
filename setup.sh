@@ -8,7 +8,6 @@
 
 # Paths
 TRASH='/dev/null'
-PATH_SETUP_ENVVARS='Configs/sh/setup_envvars.sh'
 DIR_ENVVARS='Configs/sh'
 FILE_ENVVARS="${DIR_ENVVARS}/envvars.sh"
 # -----------------------------------------------------------------------------
@@ -25,7 +24,13 @@ LAB_NAME=${LAB_NAME}"
 # -----------------------------------------------------------------------------
 # Generate config files
 # -----------------------------------------------------------------------------
-DIR_MEIMNOX_VH='Applications/MeimBox/Dev/Services/Server/Apache/sites-available'
-DIR_APACHE_VH='Servers/Apache/Dev/Shared/sites-available'
-rm "${DIR_APACHE_VH}/"*
-cp "${DIR_MEIMNOX_VH}/"* "${DIR_APACHE_VH}/"
+DIR_APACHE_VH='Servers/Apache/Stage/Shared/sites-available'
+DIRS_APP_VH=('Applications/MeimBox/Stage/Services/Server/Apache/sites-available'
+             'Applications/LamaChat/Stage/Services/Server/Apache/sites-available')
+( (ls "${DIR_APACHE_VH}" | grep '' && rm "${DIR_APACHE_VH}/"*) \
+|| (ls "${DIR_APACHE_VH}" || mkdir "${DIR_APACHE_VH}") ) > "$TRASH" 2>&1
+for DIR_APP_VH in "${DIRS_APP_VH[@]}"
+do
+  (ls "${DIR_APP_VH}" | grep '') > "$TRASH" 2>&1  \
+  && cp "${DIR_APP_VH}/"* "${DIR_APACHE_VH}/" || printf ''
+done

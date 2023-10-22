@@ -31,7 +31,6 @@ services:
       - 7443:443
     volumes:
       - ./Servers/Apache/Dev/Shared:/var/shared:ro
-      - ./Applications/MeimBox/Dev/MeimBox/App:/var/www/meimbox.localhost:ro
     links:
       - homelab-mysql
   debian-stage:
@@ -46,6 +45,8 @@ services:
       - 7543:443
     volumes:
       - ./Servers/Apache/Stage/Shared:/var/shared:ro
+      - ./Applications/MeimBox/Stage/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud:ro
+      - ./Applications/LamaChat/Stage/LamaChat/App:/var/www/lamachat.israelmeiresonne.cloud
     links:
       - homelab-mysql
   debian-prod:
@@ -60,5 +61,7 @@ services:
       - 443:443
     volumes:
       - ./Servers/Apache/Prod/Shared:/var/shared:ro
+      - ./Applications/MeimBox/Prod/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud:ro
+      - ./Applications/LamaChat/Prod/LamaChat/App:/var/www/lamachat.israelmeiresonne.cloud
     links:
       - homelab-mysql
