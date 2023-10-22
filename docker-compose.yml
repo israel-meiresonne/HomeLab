@@ -1,4 +1,24 @@
 services:
+  homelab-mysql:
+    image: mysql:8.0
+    container_name: homelab-mysql
+    restart: always
+    tty: true
+    ports:
+      - 7306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "T_Q_utxck_8pU_wHOWgD"
+    volumes:
+      - ./Databases/MySQL/Storage/docker/mysql-datadirectory:/var/lib/mysql
+  homelab-adminer:
+    image: adminer
+    container_name: homelab-adminer
+    restart: always
+    tty: true
+    ports:
+      - 7808:8080
+    links:
+      - homelab-mysql
   debian-dev:
     container_name: homelab-debian-dev
     restart: always
@@ -12,24 +32,4 @@ services:
     volumes:
       - ./Servers/Apache/Dev/Shared:/var/shared:ro
     links:
-        - homelab-mysql
-  homelab-mysql:
-    image: mysql:8.0
-    container_name: homelab-mysql
-    restart: always
-    tty: true
-    ports:
-        - 7306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: "T_Q_utxck_8pU_wHOWgD"
-    volumes:
-      - ./Databases/MySQL/Storage/docker/mysql-datadirectory:/var/lib/mysql
-  homelab-adminer:
-    image: adminer
-    container_name: homelab-adminer
-    restart: always
-    tty: true
-    ports:
-      - 7808:8080
-    links:
-        - homelab-mysql
+      - homelab-mysql
