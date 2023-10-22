@@ -31,5 +31,6 @@ services:
       - 7443:443
     volumes:
       - ./Servers/Apache/Dev/Shared:/var/shared:ro
+      - ./Applications/IsraelMeiresonne/Dev/IsraelMeiresonne/App:/var/www/israelmeiresonne.localhost:ro
     links:
       - homelab-mysql
