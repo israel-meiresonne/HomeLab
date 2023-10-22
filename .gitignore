@@ -2,4 +2,4 @@
 Applications/MeimBox
 Configs/*
 Databases/MySQL/Storage/docker/mysql-datadirectory
-Servers/Apache/Dev/Shared
+Servers/Apache/*/Shared
