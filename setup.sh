@@ -8,7 +8,6 @@
 
 # Paths
 TRASH='/dev/null'
-PATH_SETUP_ENVVARS='Configs/sh/setup_envvars.sh'
 DIR_ENVVARS='Configs/sh'
 FILE_ENVVARS="${DIR_ENVVARS}/envvars.sh"
 # -----------------------------------------------------------------------------
@@ -22,3 +21,15 @@ ALL_VAR="#!/bin/bash${S}
 LAB_ROOT=${LAB_ROOT}
 LAB_NAME=${LAB_NAME}"
 (ls "$DIR_ENVVARS" > "$TRASH" 2>&1 || mkdir "$DIR_ENVVARS") && echo "$ALL_VAR" > $FILE_ENVVARS
+# -----------------------------------------------------------------------------
+# Generate config files
+# -----------------------------------------------------------------------------
+DIR_APACHE_VH='Servers/Apache/Dev/Shared/sites-available'
+DIRS_APP_VH=('Applications/IsraelMeiresonne/Dev/Services/Server/Apache/sites-available')
+( (ls "${DIR_APACHE_VH}" | grep '' && rm "${DIR_APACHE_VH}/"*) \
+|| (ls "${DIR_APACHE_VH}" || mkdir "${DIR_APACHE_VH}") ) > "$TRASH" 2>&1
+for DIR_APP_VH in "${DIRS_APP_VH[@]}"
+do
+  (ls "${DIR_APP_VH}" | grep '') > "$TRASH" 2>&1  \
+  && cp "${DIR_APP_VH}/"* "${DIR_APACHE_VH}/" || printf ''
+done
