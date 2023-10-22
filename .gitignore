@@ -1,5 +1,6 @@
 .DS_Store
 Applications/*
+!Applications/IsraelMeiresonne
 Configs/*
 Databases/MySQL/Storage/docker/mysql-datadirectory
 Servers/Apache/*/Shared
