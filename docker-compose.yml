@@ -33,3 +33,31 @@ services:
       - ./Servers/Apache/Dev/Shared:/var/shared:ro
     links:
       - homelab-mysql
+  debian-stage:
+    container_name: homelab-debian-stage
+    restart: always
+    tty: true
+    build:
+      context: ./Servers/Apache/Stage
+      dockerfile: Dockerfile
+    ports:
+      - 7090:80
+      - 7543:443
+    volumes:
+      - ./Servers/Apache/Stage/Shared:/var/shared:ro
+    links:
+      - homelab-mysql
+  debian-prod:
+    container_name: homelab-debian-prod
+    restart: always
+    tty: true
+    build:
+      context: ./Servers/Apache/Prod
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Servers/Apache/Prod/Shared:/var/shared:ro
+    links:
+      - homelab-mysql
