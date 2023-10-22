@@ -45,6 +45,7 @@ services:
       - 7543:443
     volumes:
       - ./Servers/Apache/Stage/Shared:/var/shared:ro
+      - ./Applications/IsraelMeiresonne/Stage/IsraelMeiresonne/App:/var/www/israelmeiresonne.cloud:ro
       - ./Applications/MeimBox/Stage/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud:ro
       - ./Applications/LamaChat/Stage/LamaChat/App:/var/www/lamachat.israelmeiresonne.cloud
     links:
@@ -61,6 +62,7 @@ services:
       - 443:443
     volumes:
       - ./Servers/Apache/Prod/Shared:/var/shared:ro
+      - ./Applications/IsraelMeiresonne/Prod/IsraelMeiresonne/App:/var/www/israelmeiresonne.cloud:ro
       - ./Applications/MeimBox/Prod/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud:ro
       - ./Applications/LamaChat/Prod/LamaChat/App:/var/www/lamachat.israelmeiresonne.cloud
     links:
