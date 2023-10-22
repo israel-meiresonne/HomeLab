@@ -31,6 +31,7 @@ services:
       - 7443:443
     volumes:
       - ./Servers/Apache/Dev/Shared:/var/shared:ro
+      - ./Applications/MeimBox/Dev/MeimBox/App:/var/www/meimbox.localhost:ro
     links:
       - homelab-mysql
   debian-stage:
