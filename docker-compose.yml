@@ -44,9 +44,15 @@ services:
       - 7090:80
       - 7543:443
     volumes:
-      - ./Servers/Apache/Stage/Shared:/var/shared:ro
-      - ./Applications/IsraelMeiresonne/Stage/IsraelMeiresonne/App:/var/www/israelmeiresonne.cloud:ro
-      - ./Applications/MeimBox/Stage/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud:ro
+      # Shared
+      - ./Servers/Apache/Stage/Shared/var/shared:/var/shared
+      - ./Servers/Apache/Stage/Shared/var/log:/var/log
+      - ./Servers/Apache/Stage/Shared/var/mail:/var/mail
+      - ./Servers/Apache/Stage/Shared/etc/letsencrypt:/etc/letsencrypt
+      - ./Servers/Apache/Stage/Shared/root/scripts:/root/scripts
+      # Webroots
+      - ./Applications/IsraelMeiresonne/Stage/IsraelMeiresonne/App:/var/www/israelmeiresonne.cloud
+      - ./Applications/MeimBox/Stage/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud
       - ./Applications/LamaChat/Stage/LamaChat/App:/var/www/lamachat.israelmeiresonne.cloud
     links:
       - homelab-mysql
@@ -62,6 +68,7 @@ services:
       - 443:443
     volumes:
       - ./Servers/Apache/Prod/Shared:/var/shared:ro
+      - ./Servers/Apache/Prod/Log:/var/log/apache2
       - ./Applications/IsraelMeiresonne/Prod/IsraelMeiresonne/App:/var/www/israelmeiresonne.cloud:ro
       - ./Applications/MeimBox/Prod/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud:ro
       - ./Applications/LamaChat/Prod/LamaChat/App:/var/www/lamachat.israelmeiresonne.cloud
