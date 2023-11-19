@@ -1,4 +1,5 @@
 .DS_Store
 Configs/*
+!Configs/letsencrypt
 Databases/MySQL/Storage/docker/mysql-datadirectory
 Servers/Apache/*/Shared
