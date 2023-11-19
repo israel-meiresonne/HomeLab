@@ -3,3 +3,4 @@ Configs/*
 !Configs/letsencrypt
 Databases/MySQL/Storage/docker/mysql-datadirectory
 Servers/Apache/*/Shared
+Servers/Apache/*/Config/root/scripts/letsencrypt/certbot.sh
