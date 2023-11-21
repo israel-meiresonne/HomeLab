@@ -67,10 +67,15 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./Servers/Apache/Prod/Shared:/var/shared:ro
-      - ./Servers/Apache/Prod/Log:/var/log/apache2
-      - ./Applications/IsraelMeiresonne/Prod/IsraelMeiresonne/App:/var/www/israelmeiresonne.cloud:ro
-      - ./Applications/MeimBox/Prod/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud:ro
+      # Shared
+      - ./Servers/Apache/Prod/Shared/var/shared:/var/shared
+      - ./Servers/Apache/Prod/Shared/var/log:/var/log
+      - ./Servers/Apache/Prod/Shared/var/mail:/var/mail
+      - ./Servers/Apache/Prod/Shared/etc/letsencrypt:/etc/letsencrypt
+      - ./Servers/Apache/Prod/Shared/root/scripts:/root/scripts
+      # Webroots
+      - ./Applications/IsraelMeiresonne/Prod/IsraelMeiresonne/App:/var/www/israelmeiresonne.cloud
+      - ./Applications/MeimBox/Prod/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud
       - ./Applications/LamaChat/Prod/LamaChat/App:/var/www/lamachat.israelmeiresonne.cloud
     links:
       - homelab-mysql
