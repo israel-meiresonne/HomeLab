@@ -46,11 +46,12 @@ LAB_NAME=${LAB_NAME}"
 MASK_LOCK=551
 MASK_UNLOCK=751
 # - Load config for Apache's Virtual Host
-DIR_APACHE_VH='Servers/Apache/Stage/Shared/var/shared/sites-available'
-DIRS_APP_VH=('Applications/IsraelMeiresonne/Stage/Services/Server/Apache/sites-available'
-  'Applications/MeimBox/Stage/Services/Server/Apache/sites-available'
-  'Applications/LamaChat/Stage/Services/Server/Apache/sites-available')
-if test -d "$DIR_APACHE_VH" && (ls "$DIR_APACHE_VH" | grep '' >"$TRASH" 2>&1); then
+DIR_APACHE_VH='Servers/Apache/Prod/Shared/var/shared/sites-available'
+DIRS_APP_VH=('Applications/IsraelMeiresonne/Prod/Services/Server/Apache/sites-available'
+  'Applications/MeimBox/Prod/Services/Server/Apache/sites-available'
+  'Applications/LamaChat/Prod/Services/Server/Apache/sites-available')
+test -d "$DIR_APACHE_VH" || mkdir -p "$DIR_APACHE_VH"
+if (ls "$DIR_APACHE_VH" | grep '' >"$TRASH" 2>&1); then
   # Directory Not empty
   chmod "$MASK_UNLOCK" "${DIR_APACHE_VH}/"* &&
     rm "${DIR_APACHE_VH}/"*
@@ -63,7 +64,7 @@ done
 # - Distribute Certbot to Servers
 FILE_CERTBOT="${LAB_ROOT}/Configs/letsencrypt/certbot.sh"
 FILE_CERTBOT_NAME=$(get_last_file "$FILE_CERTBOT")
-DIRS_SERVER_CERTBOT=("${LAB_ROOT}/Servers/Apache/Stage/Config/root/scripts/letsencrypt")
+DIRS_SERVER_CERTBOT=("${LAB_ROOT}/Servers/Apache/Prod/Config/root/scripts/letsencrypt")
 for DIR_SERVER_CERTBOT in "${DIRS_SERVER_CERTBOT[@]}"; do
   FILE_COPY_CERTBOT="${DIR_SERVER_CERTBOT}/${FILE_CERTBOT_NAME}"
   (test -d "$DIR_SERVER_CERTBOT" || mkdir -p "$DIR_SERVER_CERTBOT") &&
@@ -73,10 +74,13 @@ for DIR_SERVER_CERTBOT in "${DIRS_SERVER_CERTBOT[@]}"; do
     chmod "$MASK_LOCK" "$FILE_COPY_CERTBOT"
 done
 # - Load 'Config/' to Shared Volume
-DIR_ROOT_SCRIPT="${LAB_ROOT}/Servers/Apache/Stage/Config/root/scripts"
-DIR_SHARED_ROOT_SCRIPT="${LAB_ROOT}/Servers/Apache/Stage/Shared/root/scripts"
+DIR_ROOT_SCRIPT="${LAB_ROOT}/Servers/Apache/Prod/Config/root/scripts"
+DIR_SHARED_ROOT_SCRIPT="${LAB_ROOT}/Servers/Apache/Prod/Shared/root/scripts"
 (test -d "$DIR_SHARED_ROOT_SCRIPT" || mkdir -p "$DIR_SHARED_ROOT_SCRIPT") &&
   cp -fR "${DIR_ROOT_SCRIPT}/"* "$DIR_SHARED_ROOT_SCRIPT"
+# - Prepare Apache Volume
+DIR_APACHE_LOG="${LAB_ROOT}/Servers/Apache/Prod/Shared/var/log/apache2"
+test -d "$DIR_APACHE_LOG" || mkdir -p "$DIR_APACHE_LOG"
 # # ----------------------------------------------------------------------------❌
 # echo "Hello" ❌
 # # ----------------------------------------------------------------------------❌
