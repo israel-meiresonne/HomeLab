@@ -1,5 +1,6 @@
 .DS_Store
-Applications/*
 Configs/*
+!Configs/letsencrypt
 Databases/MySQL/Storage/docker/mysql-datadirectory
-Servers/Apache/Dev/Shared
+Servers/Apache/*/Shared
+Servers/Apache/*/Config/root/scripts/letsencrypt/certbot.sh

@@ -1,4 +1,24 @@
 services:
+  homelab-mysql:
+    image: mysql:8.0
+    container_name: homelab-mysql
+    restart: always
+    tty: true
+    ports:
+      - 7306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "T_Q_utxck_8pU_wHOWgD"
+    volumes:
+      - ./Databases/MySQL/Storage/docker/mysql-datadirectory:/var/lib/mysql
+  homelab-adminer:
+    image: adminer
+    container_name: homelab-adminer
+    restart: always
+    tty: true
+    ports:
+      - 7808:8080
+    links:
+      - homelab-mysql
   debian-dev:
     container_name: homelab-debian-dev
     restart: always
@@ -12,24 +32,50 @@ services:
     volumes:
       - ./Servers/Apache/Dev/Shared:/var/shared:ro
     links:
-        - homelab-mysql
-  homelab-mysql:
-    image: mysql:8.0
-    container_name: homelab-mysql
+      - homelab-mysql
+  debian-stage:
+    container_name: homelab-debian-stage
     restart: always
     tty: true
+    build:
+      context: ./Servers/Apache/Stage
+      dockerfile: Dockerfile
     ports:
-        - 7306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: "T_Q_utxck_8pU_wHOWgD"
+      - 7090:80
+      - 7543:443
     volumes:
-      - ./Databases/MySQL/Storage/docker/mysql-datadirectory:/var/lib/mysql
-  homelab-adminer:
-    image: adminer
-    container_name: homelab-adminer
+      # Shared
+      - ./Servers/Apache/Stage/Shared/var/shared:/var/shared
+      - ./Servers/Apache/Stage/Shared/var/log:/var/log
+      - ./Servers/Apache/Stage/Shared/var/mail:/var/mail
+      - ./Servers/Apache/Stage/Shared/etc/letsencrypt:/etc/letsencrypt
+      - ./Servers/Apache/Stage/Shared/root/scripts:/root/scripts
+      # Webroots
+      - ./Applications/IsraelMeiresonne/Stage/IsraelMeiresonne/App:/var/www/israelmeiresonne.cloud
+      - ./Applications/MeimBox/Stage/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud
+      - ./Applications/LamaChat/Stage/LamaChat/App:/var/www/lamachat.israelmeiresonne.cloud
+    links:
+      - homelab-mysql
+  debian-prod:
+    container_name: homelab-debian-prod
     restart: always
     tty: true
+    build:
+      context: ./Servers/Apache/Prod
+      dockerfile: Dockerfile
     ports:
-      - 7808:8080
+      - 80:80
+      - 443:443
+    volumes:
+      # Shared
+      - ./Servers/Apache/Prod/Shared/var/shared:/var/shared
+      - ./Servers/Apache/Prod/Shared/var/log:/var/log
+      - ./Servers/Apache/Prod/Shared/var/mail:/var/mail
+      - ./Servers/Apache/Prod/Shared/etc/letsencrypt:/etc/letsencrypt
+      - ./Servers/Apache/Prod/Shared/root/scripts:/root/scripts
+      # Webroots
+      - ./Applications/IsraelMeiresonne/Prod/IsraelMeiresonne/App:/var/www/israelmeiresonne.cloud
+      - ./Applications/MeimBox/Prod/MeimBox/App:/var/www/meimbox.israelmeiresonne.cloud
+      - ./Applications/LamaChat/Prod/LamaChat/App:/var/www/lamachat.israelmeiresonne.cloud
     links:
-        - homelab-mysql
+      - homelab-mysql
