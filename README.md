@@ -1,4 +1,4 @@
-# E-shop
+# HomeLab
 <!-- ❌ Don't Delete This Comment ❌
 Project short description:
   Full-stack e-shop web application
