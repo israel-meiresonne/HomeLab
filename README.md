@@ -1,9 +1,24 @@
 # HomeLab
 <!-- ❌ Don't Delete This Comment ❌
 Project short description:
-  Full-stack e-shop web application
+  My homeLab platform to manage my applications.
 Project Topics (tags):
-  mysql css html jquery php javascipt
+  javascript mysql css html php apache adminer
 -->
 
-Plateform to manage my applications.
+Platform to manage my applications.
+
+## Technologies
+
+* Platform:
+  * Apache
+  * MySQL
+  * Adminer
+  * Docker
+  * SSL Certificate
+* App:
+  * PHP
+  * HTML
+  * CSS
+  * JavaScript
+  * JQuery
